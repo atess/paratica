@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div fxFlex fxLayout="column">
+    <div fxFlex="100" fxLayoutAlign="start center" class="mb-3">
+      <h2 class="mb-0">Giris Yap</h2>
+    </div>
+
+    <form *ngIf="form" [formGroup]="form"
+          (submit)="submit()"
+          fxFlex fxLayout="column">
+      <div fxFlex fxLayout="column" fxLayoutGap="10px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Kullanici adi</mat-label>
+          <input matInput type="text" name="username" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Sifre</mat-label>
+          <input matInput type="password" name="password" formControlName="password">
+        </mat-form-field>
+      </div>
+
+      <div align="end">
+        <button mat-button (click)="setUser('admin')">login admin</button>
+        <button mat-button (click)="setUser('normal')">login normal</button>
+        <button mat-stroked-button [disabled]="form.invalid || (loading$ | async)">Giris</button>
+      </div>
+    </form>
+  </div>
+</div>

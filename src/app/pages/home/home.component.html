@@ -1,0 +1,18 @@
+<div fxFlex fxLayout="column">
+  <app-favorites fxFlex></app-favorites>
+
+  <cdk-virtual-scroll-viewport itemSize="40" class="box">
+    <div *cdkVirtualFor="let market of markets" class="box-item">
+      <a mat-icon-button
+         matTooltip="Favorilere Ekle"
+         (click)="favoriteService.toggleFavorite(market)">
+        <mat-icon *ngIf="favoriteService.checkFavorite(market)">favorite</mat-icon>
+        <mat-icon *ngIf="!favoriteService.checkFavorite(market)">favorite_border</mat-icon>
+      </a>
+
+      <img height="20" [src]="market.image" [alt]="market.name" />
+
+      {{market.name}} - {{market.current_price}}
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
