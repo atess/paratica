@@ -2,21 +2,22 @@
   <app-favorites fxFlex></app-favorites>
 
   <cdk-virtual-scroll-viewport itemSize="40" class="box">
-    <div *cdkVirtualFor="let market of markets" class="box-item">
-      <a mat-icon-button
-         matTooltip="Platform'da Goster"
-         (click)="platformService.togglePlatform(market)">
+    <div *cdkVirtualFor="let market of markets; index as index" class="box-item">
+      <button mat-icon-button
+              matTooltip="Platform'da Goster"
+              [disabled]="index > 9"
+              (click)="platformService.togglePlatform(market)">
         <mat-icon *ngIf="!platformService.checkPlatform(market)">bookmark_border</mat-icon>
         <mat-icon *ngIf="platformService.checkPlatform(market)">bookmark_added</mat-icon>
-      </a>
-      <a mat-icon-button
-         matTooltip="Favorilere Ekle"
-         (click)="favoriteService.toggleFavorite(market)">
+      </button>
+      <button mat-icon-button
+              matTooltip="Favorilere Ekle"
+              (click)="favoriteService.toggleFavorite(market)">
         <mat-icon *ngIf="favoriteService.checkFavorite(market)">favorite</mat-icon>
         <mat-icon *ngIf="!favoriteService.checkFavorite(market)">favorite_border</mat-icon>
-      </a>
+      </button>
 
-      <img height="20" [src]="market.image" [alt]="market.name" />
+      <img height="20" [src]="market.image" [alt]="market.name"/>
 
       {{market.name}} - {{market.current_price}}
     </div>

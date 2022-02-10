@@ -29,10 +29,11 @@ export class AdminComponent implements OnInit, OnDestroy {
       category: 'asset-backed-tokens',
       vs_currency: 'usd',
     }).subscribe(markets => {
-      this.markets = markets;
+      this.markets = markets.sort((a, b) => {
+        return a.market_cap - b.market_cap;
+      });
       this.cd.detectChanges();
     });
-
 
     this.favoriteService.favorites$
       .pipe(takeUntil(this.destroySubject$))
